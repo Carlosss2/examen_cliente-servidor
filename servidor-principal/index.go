@@ -1,5 +1,4 @@
 package servidorprincipal
-
 import (
 	"fmt"
 	"net/http"
@@ -8,17 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 func Run() {
 	r := gin.Default()
 
-	r.POST("/users", createProduct)
-	r.GET("/users", getProduct)
+	r.POST("/products", createProduct)
+	r.GET("/products", getProducts)
+	r.PUT("/products", updateProduct)
+	r.DELETE("/products", deleteProduct)
 	r.GET("/cambios", getCambios)
 	r.GET("/send-to-replication", sendProductToReplication)
 
 	srv := &http.Server{
-		Addr:         ":4000",
+		Addr:         ":5000",
 		Handler:      r,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 5 * time.Minute,
